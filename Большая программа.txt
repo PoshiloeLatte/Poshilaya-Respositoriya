@@ -1,0 +1,330 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
+
+using namespace std;
+struct car
+{
+	int id;
+	int price;
+	string mark;
+	int year;
+	string category; //sport , heavy , light
+	bool old;
+};
+void main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand(time(NULL));
+	car mash;
+	ifstream fin;
+
+	fin.open("input.txt");
+
+	vector<car> a;
+	string str;
+	mash.id = 1;
+	if (fin.is_open())
+	{
+		while (!fin.eof())
+		{
+			car buf;
+			fin >> buf.id;
+			fin >> buf.price;
+			fin >> buf.mark;
+			fin >> buf.year;
+			fin >> buf.category;
+			fin >> buf.old;
+			a.push_back(buf);
+			mash.id = mash.id + 1;
+		}
+		fin.close();
+	}
+	else
+	{
+		cout << "Базы нет" << endl;
+	}
+	char m;
+
+	int answer = -1;
+	while (answer != 0)
+	{
+		cout << "MЕНЮ" << endl;
+		cout << "1.Вся информация" << endl;
+		cout << "2.Добавление автомобиля" << endl;
+		cout << "3.Удаление автомобиля" << endl;
+		cout << "4.Информация по категориям" << endl;
+		cout << "5.Сохранение в файл" << endl;
+		cout << "6.Сортировка по году" << endl;
+		cin >> answer;
+		switch (answer)
+		{
+		case 1:
+		{
+			for (int i = 0; i < a.size(); i++)
+			{
+				cout << a[i].id << endl << "Марка машины: " << a[i].mark << endl << "Год выпуска: " << a[i].year << endl << "Категория: " << a[i].category << endl << "Б/У: " << a[i].old << endl << "Цена: " << a[i].price << endl;
+			}
+			break;
+		}
+		case 2:
+		{
+			cout << "Введите марку" << endl;
+			cin >> mash.mark;
+			cout << "Введите год выпуска" << endl;
+			cin >> mash.year;
+			cout << "Введите категорию машины" << endl;
+			cin >> mash.category;
+			cout << "Укажите старая ли машина" << endl;
+			cin >> m;
+			if (m == 'y')
+			{
+				mash.old = true;
+			}
+			if (m == 'n')
+			{
+				mash.old = false;
+			}
+			cout << "Укажите цену" << endl;
+			cin >> mash.price;
+			a.push_back(mash);
+			mash.id = mash.id + 1;
+			break;
+		}
+		case 3:
+		{
+			int x;
+			int ids;
+			cout << "1.по айди" << endl;
+			cout << "2.по категориям" << endl;
+
+			cin >> x;
+			if (x == 1)
+			{
+				cin >> ids;
+				a.erase(a.begin() + ids);
+			}
+			if (x == 2)
+			{
+				cout << "MЕНЮ УДАЛЕНИЯ:" << endl;
+				cout << "1.По марке" << endl;
+				cout << "2.По году выпуска" << endl;
+				cout << "3.По категории" << endl;
+				cout << "4.Б/У?" << endl;
+				cout << "5.По цене" << endl;
+				cout << endl;
+				int cs;
+				cin >> cs;
+				switch (cs)
+				{
+				case 1:
+				{
+					cout << "Введите марку" << endl;
+					cin >> str;
+					for (int i = 0; i < a.size(); i++)
+					{
+						if (str == a[i].mark)
+						{
+							a.erase(a.begin() + i);
+						}
+					}
+					break;
+				}
+				case 2:
+				{
+					cout << "Введите год выпуска" << endl;
+					cin >> x;
+					for (int i = 0; i < a.size(); i++)
+					{
+						if (x == a[i].year)
+						{
+							a.erase(a.begin() + i);
+						}
+					}
+					break;
+				}
+				case 3:
+				{
+					cout << "Введите категорию машины" << endl;
+					cin >> str;
+					for (int i = 0; i < a.size(); i++)
+					{
+						if (str == a[i].category)
+						{
+							a.erase(a.begin() + i);
+						}
+					}
+					break;
+				}
+				case 4:
+				{
+					cout << "укажите состояние автомобиля" << endl;
+					bool n;
+					cin >> n;
+					for (int i = 0; i < a.size(); i++)
+					{
+						if (n == a[i].old)
+						{
+							a.erase(a.begin() + i);
+						}
+					}
+					break;
+				}
+				case 5:
+				{
+					cout << "Введите цену" << endl;
+					cin >> x;
+					for (int i = 0; i < a.size(); i++)
+					{
+						if (x == a[i].price)
+						{
+							a.erase(a.begin() + i);
+						}
+					}
+					break;
+				}
+				default:
+				{
+					break;
+				}
+				}
+			}
+			break;
+		}
+		case 4:
+		{
+			int ds;
+			cout << "Меню информации" << endl;
+			cout << "1.Марки" << endl;
+			cout << "2.Дата изготовления" << endl;
+			cout << "3.Категория" << endl;
+			cout << "4.Б/У" << endl;
+			cout << "5.Цена" << endl;
+			cin >> ds;
+			switch (ds)
+			{
+			case 1:
+			{
+				cin >> str;
+				for (int i = 0; i < a.size(); i++)
+				{
+					
+					if (a[i].mark == str)
+					{
+						cout << a[i].id << endl << "Марка машины: " << a[i].mark << endl << "Год выпуска: " << a[i].year << endl << "Категория: " << a[i].category << endl << "Б/У: " << a[i].old << endl << "Цена: " << a[i].price << endl;
+						cout << endl;
+					}
+				}
+				break;
+			}
+			case 2:
+			{
+				int x;
+				cin >> x;
+				for (int i = 0; i < a.size(); i++)
+				{
+					if (a[i].year == x)
+					{
+						cout << a[i].id << endl << "Марка машины: " << a[i].mark << endl << "Год выпуска: " << a[i].year << endl << "Категория: " << a[i].category << endl << "Б/У: " << a[i].old << endl << "Цена: " << a[i].price << endl;
+						cout << endl;
+					}
+				}
+				break;
+			}
+			case 3:
+			{
+				cin >> str;
+				for (int i = 0; i < a.size(); i++)
+				{
+					
+					if (a[i].category == str)
+					{
+						cout << a[i].id << endl << "Марка машины: " << a[i].mark << endl << "Год выпуска: " << a[i].year << endl << "Категория: " << a[i].category << endl << "Б/У: " << a[i].old << endl << "Цена: " << a[i].price << endl;
+						cout << endl;
+					}
+				}
+				break;
+			}
+			case 4:
+			{
+				int n;
+				cin >> n;
+				for (int i = 0; i < a.size(); i++)
+				{	
+					if (a[i].old == n)
+					{
+						cout << a[i].id << endl << "Марка машины: " << a[i].mark << endl << "Год выпуска: " << a[i].year << endl << "Категория: " << a[i].category << endl << "Б/У: " << a[i].old << endl << "Цена: " << a[i].price << endl;
+						cout << endl;
+					}
+				}
+				break;
+			}
+			case 5:
+			{
+				int n;
+				cin >> n;
+				for (int i = 0; i < a.size(); i++)
+				{
+					if (a[i].price == n)
+					{
+						cout << a[i].id << endl <<"Марка машины: "<< a[i].mark << endl <<"Год выпуска: "<< a[i].year << endl <<"Категория: "<< a[i].category << endl <<"Б/У: "<< a[i].old << endl<<"Цена: "<<a[i].price<<endl;
+						cout << endl;
+					}
+				}
+				break;
+			}
+			default:
+			{
+				break;
+			}
+			}
+			break;
+		}
+		case 5:
+		{
+			ofstream fout;
+			fout.open("example.txt");
+			for (int i = 0; i < a.size(); i++)
+			{
+				fout << a[i].id << "  ";
+				fout << a[i].mark << "  ";
+				fout << a[i].year << "  ";
+				fout << a[i].category << "  ";
+				fout << a[i].old<<"  ";
+				fout << a[i].price;
+				fout << endl;
+			}
+			fout.close();
+			break;
+		}
+		case 6:
+		{
+			for (int i = 0; i < a.size() - 1; i++)
+			{
+				for (int j = 0; j < a.size() - i - 1; j++)
+				{
+					if (a[j].year > a[j + 1].year)
+					{
+						swap(a[j], a[j + 1]);
+					}
+				}
+			}
+
+			break;
+		}
+		default:
+		{
+			break;
+		}
+		}
+	}
+
+
+
+
+	system("pause");
+}
