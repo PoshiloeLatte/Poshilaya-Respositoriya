@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
+
+using namespace std;
+struct woman
+{
+	string name;
+	int age;
+	bool married;
+};
+struct child
+{
+	string name;
+	int size;
+	int weight;
+};
+child children(woman a)
+{
+	child b;
+	cout << "Введите свое имя" << endl;
+	cin >> a.name;
+	cout << "Введите свой возраст" << endl;
+	cin >> a.age;
+	cout << "укажите замужем вы или нет" << endl;
+	cin >> a.married;
+	if (a.age < 18 || a.married != 1)
+	{
+		cout << a.name << "Вам нельзя заводить детей" << endl;
+	}
+	else
+	{
+		cout << "Ребёнок:" << endl;
+		cout << "Введите имя" << endl;
+		cin >> b.name;
+		b.size = rand() % 10 + 50;
+		cout << "Рост ребенка:" << b.size << endl;
+		b.weight = rand() % 3 + 3;
+		cout << "Вес ребенка:" << b.weight << endl;
+		return b;
+	}
+
+}
+void compliment(woman a)
+{
+	if (a.age > 30)
+	{
+		cout << a.name << "вы прекрасно выглядите для своих" << a.age << endl;
+	}
+	else
+	{
+		cout << a.name << "вы прекрасно выглядите" << endl;
+	}
+}
+void main()
+{
+	setlocale(LC_ALL, "Rus");
+	srand(time(NULL));
+	woman you;
+	children(you);
+
+	compliment(you);
+
+
+
+
+
+
+
+	system("pause");
+}
