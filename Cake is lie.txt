@@ -1,0 +1,166 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
+
+using namespace std;
+class Cake
+{
+private:
+	string filling;
+	int weight;
+	bool ready;
+
+public:
+	
+	Cake()
+	{
+		filling = "";
+		weight = 0;
+		ready = 0;
+	}
+	Cake(string f, int w, bool r)
+	{
+		filling = f;
+		weight = w;
+		ready = r;
+	}
+	void Show()
+	{
+		cout << "Filling:" << filling << endl;
+		cout << "Weight:" << weight << endl;
+		cout << "cooking:" << ready << endl;
+	}
+	void Cook()
+	{
+		if (ready == 0)
+		{
+			ready = 1;
+			cout << "you just cooked this cake" << endl;
+		}
+		else
+		{
+			cout << "cake is already cooked" << endl;
+		}
+	}
+	void Eat(string f,int w,bool r)
+	{
+		if(ready==0)
+		{
+			cout << "firstly you need to cook this cake" << endl;
+		}
+		else
+		{
+			filling = "";
+			weight = 0;
+			ready = 0;
+			cout << "you just eat this cake" << endl;
+		}
+
+	}
+	void SetFilling(string f)
+	{
+		filling = f;
+	}
+	void SetWeight(int w)
+	{
+		weight = w;
+	}
+	string GetFilling()
+	{
+		return filling;
+	}
+	int GetWeight()
+	{
+		return weight;
+	}
+	bool GetReady()
+	{
+		return ready;
+	}
+};
+void main()
+{
+	cout << "make your first cake:" << endl;
+	string f;
+	cout << "enter your filling" << endl;
+	cin >> f;
+	int w;
+	cout << "enter weight" << endl;
+	cin >> w;
+	bool r=0;
+	Cake A = Cake(f, w, r);
+	int x;
+	
+	while (true)
+	{
+		cout << "1.make cake" << endl;
+		cout << "2.Show all" << endl;
+		cout << "3.Cook" << endl;
+		cout << "4.Eat cake" << endl;
+		cout << "5.Show filling" << endl;
+		cout << "6.Show weight" << endl;
+		cout << "7.Show readiness" << endl;
+		cin >> x;
+		switch (x)
+		{
+		case 1:
+		 {
+			cout << "enter your filling" << endl;
+			cin >> f;
+			A.SetFilling(f);
+			cout << "enter weight" << endl;
+			cin >> w;
+			A.SetWeight(w);
+			Cake A = Cake(f, w, 0);
+			break;
+	     }
+		case 2:
+		 {
+			A.Show();
+			break;
+		 }
+		case 3:
+		 {
+			A.Cook();
+			break;
+		 }
+		case 4:
+		 {
+			A.Eat(f, w, r);
+			break;
+		 }
+		default:
+		 {
+			break;
+		 }
+		case 5:
+		 {
+			cout << A.GetFilling() << endl;
+			break;
+		 }
+		case 6:
+		 {
+			cout << A.GetWeight() << endl;
+			break;
+		 }
+		case 7:
+		 {
+			cout << A.GetReady() << endl;
+				break;
+		 }
+		}
+	}
+
+
+
+
+
+
+
+	cout << "cake is lie" << endl;
+	system("pause");
+}
