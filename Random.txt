@@ -1,0 +1,74 @@
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+class Random
+{
+public:
+	Random()
+	{
+
+	}
+	int RandInt(int n)
+	{
+		int a;
+		a = rand() % n;
+		return a;
+	}
+	int RandInt(int n,int m)
+	{
+		int a;
+		a = rand() % m;
+		while (a < n)
+		{
+			a++;
+		}
+		return a;
+	}
+	double RandDouble(int n)
+	{
+		double a;
+		a = (rand() % n)*0.1+ rand() % n;
+		return a;
+	}
+	double RandDouble(int n, int m)
+	{
+		double a;
+		
+		a = (rand() % m)*0.1 + (rand() % m);
+		while (a < n)
+		{
+			a++;
+		}
+		return a;
+	}
+
+
+};
+void main()
+{
+	srand(time(NULL));
+
+	Random A=Random();
+	for (int i = 0; i < 10; i++)
+	{
+		cout<<A.RandInt(100)<<"  ";
+	}
+	cout << endl;
+	for (int i = 0; i < 10; i++)
+	{
+		cout << A.RandInt(100,200) << "  ";
+	}
+	cout << endl;
+	for (int i = 0; i < 10; i++)
+	{
+		cout << A.RandDouble(100) << "  ";
+	}
+	cout << endl;
+	for (int i = 0; i < 10; i++)
+	{
+		cout << A.RandDouble(100, 200) << "  ";
+	}
+	cout << endl;
+	system("pause");
+}
