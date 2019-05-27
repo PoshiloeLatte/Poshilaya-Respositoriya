@@ -1,0 +1,367 @@
+#include <iomanip>
+#include <Windows.h>
+#include <conio.h>
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+void main()
+{
+
+	int main[8][8] =
+	{
+	{1,1,0,0,3,0,0,1},
+	{1,1,1,1,1,1,1,1},
+	{0,1,0,1,0,1,0,1},
+	{0,1,1,1,1,1,1,1},
+	{2,1,0,1,0,1,0,1},
+	{0,1,1,1,1,1,1,1},
+	{0,1,0,1,0,1,0,1},
+	{1,1,1,1,1,1,1,1}
+	};
+	int pers_x = 4;
+	int pers_y = 0;
+	int pers1_x = 0;
+	int pers1_y = 4;
+
+	int player = 1;
+
+	while (true)
+	{
+
+		system("cls");
+		for (int i = 0; i < 8; i++)
+		{
+			for (int j = 0; j < 8; j++)
+			{
+				if (main[i][j] == 1)
+				{
+					cout << static_cast<char>(178) << static_cast<char>(178);
+
+				}
+				if (main[i][j] == 0)
+				{
+					cout << "  ";
+				}
+				if (main[i][j] == 2)
+				{
+					cout << static_cast<char>(249) << static_cast<char>(249);
+				}
+				if (main[i][j] == 3)
+				{
+					cout << static_cast<char>(249) << static_cast<char>(249);
+				}
+				if (main[i][j] == 4)
+				{
+					cout << "X" << "X";
+				}
+				if (main[i][j] == 5)
+				{
+					cout << "O" << "O";
+				}
+			}
+			cout << endl;
+		}
+		if ((main[2][2] == 4 && main[4][4] == 4 && main[6][6] == 4) || (main[2][2] == 5 && main[4][4] == 5 && main[6][6] == 5))
+		{
+			cout << "  WIN";
+			break;
+		}
+		if ((main[2][2] == 4 && main[4][2] == 4 && main[6][2] == 4) || (main[2][2] == 5 && main[4][2] == 5 && main[6][2] == 5))
+		{
+			cout << "  WIN";
+			break;
+		}
+		if ((main[2][4] == 4 && main[4][4] == 4 && main[6][4] == 4) || (main[2][4] == 5 && main[4][4] == 5 && main[6][4] == 5))
+		{
+			cout << "  WIN";
+			break;
+		}
+		if ((main[2][6] == 4 && main[4][6] == 4 && main[6][6] == 4) || (main[2][6] == 5 && main[4][6] == 5 && main[6][6] == 5))
+		{
+			cout << "  WIN";
+			break;
+		}
+		if ((main[2][2] == 4 && main[2][4] == 4 && main[2][6] == 4) || (main[2][2] == 5 && main[2][4] == 5 && main[2][6] == 5))
+		{
+			cout << "  WIN";
+			break;
+		}
+		if ((main[4][2] == 4 && main[4][4] == 4 && main[4][6] == 4) || (main[4][2] == 5 && main[4][4] == 5 && main[4][6] == 5))
+		{
+			cout << "  WIN";
+			break;
+		}
+		if ((main[6][2] == 4 && main[6][4] == 4 && main[6][6] == 4) || (main[6][2] == 5 && main[6][4] == 5 && main[6][6] == 5))
+		{
+			cout << "  WIN";
+			break;
+		}
+		if ((main[2][6] == 4 && main[4][4] == 4 && main[6][2] == 4) || (main[2][6] == 5 && main[4][4] == 5 && main[6][2] == 5))
+		{
+			cout << "  WIN";
+			break;
+		}
+		cout << endl;
+		cout << "player:" << player << endl;
+		int key = _getch();
+		main[pers_x][pers_y] = 0;
+		main[pers1_x][pers1_y] = 0;
+		if (key == 72)
+		{
+			if (main[pers_x - 1][pers_y] != 1)
+			{
+				pers_x -= 2;
+			}
+		}
+		if (key == 80)
+		{
+			if (main[pers_x + 1][pers_y] != 1)
+			{
+				pers_x += 2;
+			}
+		}
+		if (key == 77)
+		{
+			if (main[pers1_x][pers1_y + 1] != 1)
+			{
+				pers1_y += 2;
+			}
+		}
+		if (key == 75)
+		{
+			if (main[pers1_x][pers1_y - 1] != 1)
+			{
+				pers1_y -= 2;
+			}
+		}
+		if (key == 32)
+		{
+
+			if (pers_x == 2 && pers1_y == 2 && player == 1)
+			{
+				if (main[2][2] != 4 && main[2][2] != 5)
+				{
+					main[2][2] = 4;
+					player = 2;
+				}
+				else
+				{
+					player = 1;
+				}
+			}
+			if (pers_x == 2 && pers1_y == 2 && player == 2)
+			{
+				if (main[2][2] != 4 && main[2][2] != 5)
+				{
+					main[2][2] = 5;
+					player = 1;
+				}
+				else
+				{
+					player = 2;
+				}
+			}
+			if (pers_x == 4 && pers1_y == 4 && player == 1)
+			{
+				if (main[4][4] != 4 && main[4][4] != 5)
+				{
+					main[4][4] = 4;
+					player = 2;
+				}
+				else
+				{
+					player = 1;
+				}
+			}
+			if (pers_x == 4 && pers1_y == 4 && player == 2)
+			{
+				if (main[4][4] != 4 && main[4][4] != 5)
+				{
+					main[4][4] = 5;
+					player = 1;
+				}
+				else
+				{
+					player = 2;
+				}
+			}
+			if (pers_x == 6 && pers1_y == 6 && player == 1)
+			{
+				if (main[6][6] != 4 && main[6][6] != 5)
+				{
+					main[6][6] = 4;
+					player = 2;
+				}
+				else
+				{
+					player = 1;
+				}
+			}
+			if (pers_x == 6 && pers1_y == 6 && player == 2)
+			{
+				if (main[6][6] != 4 && main[6][6] != 5)
+				{
+					main[6][6] = 5;
+					player = 1;
+				}
+				else
+				{
+					player = 2;
+				}
+			}
+			if (pers_x == 2 && pers1_y == 4 && player == 1)
+			{
+				if (main[2][4] != 4 && main[2][4] != 5)
+				{
+					main[2][4] = 4;
+					player = 2;
+				}
+				else
+				{
+					player = 1;
+				}
+			}
+			if (pers_x == 2 && pers1_y == 4 && player == 2)
+			{
+				if (main[2][4] != 4 && main[2][4] != 5)
+				{
+					main[2][4] = 5;
+					player = 1;
+				}
+				else
+				{
+					player = 2;
+				}
+			}
+			if (pers_x == 2 && pers1_y == 6 && player == 1)
+			{
+				if (main[2][6] != 4 && main[2][6] != 5)
+				{
+					main[2][6] = 4;
+					player = 2;
+				}
+				else
+				{
+					player = 1;
+				}
+			}
+			if (pers_x == 2 && pers1_y == 6 && player == 2)
+			{
+				if (main[2][6] != 4 && main[2][6] != 5)
+				{
+					main[2][6] = 5;
+					player = 1;
+				}
+				else
+				{
+					player = 2;
+				}
+			}
+			if (pers_x == 4 && pers1_y == 2 && player == 1)
+			{
+				if (main[4][2] != 4 && main[4][2] != 5)
+				{
+					main[4][2] = 4;
+
+					player = 2;
+				}
+				else
+				{
+					player = 1;
+				}
+			}
+			if (pers_x == 4 && pers1_y == 2 && player == 2)
+			{
+				if (main[4][2] != 4 && main[4][2] != 5)
+				{
+					main[4][2] = 5;
+					player = 1;
+				}
+				else
+				{
+					player = 2;
+				}
+			}
+			if (pers_x == 4 && pers1_y == 6 && player == 1)
+			{
+				if (main[4][6] != 4 && main[4][6] != 5)
+				{
+					main[4][6] = 4;
+					player = 2;
+				}
+				else
+				{
+					player = 1;
+				}
+			}
+			if (pers_x == 4 && pers1_y == 6 && player == 2)
+			{
+				if (main[4][6] != 4 && main[4][6] != 5)
+				{
+					main[4][6] = 5;
+					player = 1;
+				}
+				else
+				{
+					player = 2;
+				}
+			}
+			if (pers_x == 6 && pers1_y == 2 && player == 1)
+			{
+				if (main[6][2] != 4 && main[6][2] != 5)
+				{
+					main[6][2] = 4;
+					player = 2;
+				}
+				else
+				{
+					player = 1;
+				}
+			}
+			if (pers_x == 6 && pers1_y == 2 && player == 2)
+			{
+				if (main[6][2] != 4 && main[6][2] != 5)
+				{
+					main[6][2] = 5;
+					player = 1;
+				}
+				else
+				{
+					player = 2;
+				}
+			}
+			if (pers_x == 6 && pers1_y == 4 && player == 1)
+			{
+				if (main[6][4] != 4 && main[6][4] != 5)
+				{
+					main[6][4] = 4;
+					player = 2;
+				}
+				else
+				{
+					player = 1;
+				}
+			}
+			if (pers_x == 6 && pers1_y == 4 && player == 2)
+			{
+				if (main[6][4] != 4 && main[6][4] != 5)
+				{
+					main[6][4] = 5;
+					player = 1;
+				}
+				else
+				{
+					player = 2;
+				}
+			}
+		}
+		main[pers_x][pers_y] = 2;
+		main[pers1_x][pers1_y] = 3;
+		
+		
+	}
+
+	system("pause");
+}
